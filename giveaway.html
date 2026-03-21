@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>StoneBlock服务器 - 捐赠</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
+        <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
+        <mdui-top-app-bar-title>捐赠</mdui-top-app-bar-title>
+        <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
+    </mdui-top-app-bar>
+    <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
+    <p style="text-align: center">捐赠</p>
+    <div id="giveaway">
+        <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
+            <h4>您喜欢 Stoneblock吗？</h4>
+            <p>若您觉得 StoneBlock 的氛围十分良好，帮助您获得了快乐，欢迎您捐助我们。当然这也并不强制性！</p>
+            <p>您可以使用以下方式捐赠</p>
+            <mdui-button icon="chat_bubble" class="pay_wx">微信</mdui-button>
+            <mdui-button icon="attach_money" disabled>支付宝</mdui-button>
+        </mdui-card></center>
+    </div>
+    <br >
+    <br >
+    <div id="rating">
+        <center>
+            <mdui-card
+                style="text-align: center; width: 90%"
+                variant="outlined"
+            >
+                <h4>评价 StoneBlock</h4>
+                <p>StoneBlock 给您的体验如何，您可以在这里做出评价。</p>
+                <mdui-select
+                    variant="outlined"
+                    style="width: 90%;"
+                    placeholder="作出评价"
+                    placement="top"
+                    clearable
+                    icon="star"
+                    suffix="/10分"
+                >
+                    <mdui-menu-item value="10_r">10分</mdui-menu-item>
+                    <mdui-menu-item value="9_r">9分</mdui-menu-item>
+                    <mdui-menu-item value="8_r">8分</mdui-menu-item>
+                    <mdui-menu-item value="7_r">7分</mdui-menu-item>
+                    <mdui-menu-item value="6_r">6分</mdui-menu-item>
+                    <mdui-menu-item value="5_r">5分</mdui-menu-item>
+                    <mdui-menu-item value="4_r">4分</mdui-menu-item>
+                    <mdui-menu-item value="3_r">3分</mdui-menu-item>
+                    <mdui-menu-item value="2_r">2分</mdui-menu-item>
+                    <mdui-menu-item value="1_r">1分</mdui-menu-item>
+                    <mdui-menu-item value="0_r">0分</mdui-menu-item>
+                    <mdui-icon slot="clear" name="refresh"></mdui-icon>
+                </mdui-select>
+                <br >
+                <br >
+                <mdui-text-field 
+                    label="更多详细（非必填）"
+                    rows="5"
+                    variant="outlined"
+                    placeholder="在这里写下你更多想说的"
+                    style="width: 90%"
+                    icon="question_answer"
+                >
+                </mdui-text-field>
+                <br >
+                <br >
+                <mdui-button icon="assignment_turned_in">提交评价与意见</mdui-button>
+                <br >
+                <br >
+            </mdui-card>
+    </div>
+    <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
+        <!--mdui-button-icon icon="arrow_forward" class="closeBtn"></mdui-button-icon-->
+        <mdui-list>
+            <mdui-list-item icon="menu" nonclickable>侧边栏</mdui-list-item>
+            <mdui-divider></mdui-divider>
+            <mdui-list-item icon="reorder" href="#main">总概</mdui-list-item>
+            <mdui-list-item icon="access_time" href="#recent">最近</mdui-list-item>
+            <mdui-list-item icon="achive" href="./login.html">登录</mdui-list-item>
+            <mdui-list-item icon="file_download" href="./register.html">注册</mdui-list-item>
+            <mdui-list-item icon="attach_money" href="./giveaway.html#giveaway" description="仅在此页面才会显示此图标" headline="前往捐赠"></mdui-list-item>
+            <mdui-list-item icon="star" href="./giveaway.html#rating" description="仅在此页面才会显示此图标" headline="前往评价"></mdui-list-item>
+        </mdui-list>
+    </mdui-navigation-drawer> 
+    <mdui-navigation-bar value="giveaway">
+        <mdui-navigation-bar-item icon="home" value="home">首页</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="account_box" value="info" href="./info.html">个人信息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="money_off" active-icon="attach_money" href="./giveaway.html" value="giveaway">捐赠 StoneBlock</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bug_report" href="./rep_bug.html" value="bug_report">报告漏洞</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <mdui-snackbar delay="3000" class="snackbarDNS">别点啦～啥都没有</mdui-snackbar>
+    <mdui-dialog
+        close-on-overlay-click
+        headline="使用“微信”捐助"
+        description="使用微信捐助 StoneBlock，任意金额均可！感谢您对 StoneBlock 的支持！"
+        icon="chat_bubble"
+        class="pay_dialog_wx"
+    >
+        <img src="https://img.cdn1.vip/i/698b3189b1659_1770729865.webp" style="width: 100%;height: 100%">
+        <mdui-button icon="done_all" slot="action" class="close_pay">完成</mdui-button>
+    </mdui-dialog>
+    <script>
+        const openDrawerButton = document.querySelector(".openBtn");
+        const Drawer = document.querySelector(".drawer");
+        //const closeDrawerButton = document.querySelector(".closeBtn");
+        const showSnackbarBtn = document.querySelector(".showSnackBar");
+        const SnackBarShowByDNS = document.querySelector(".snackbarDNS");
+        const closePay = document.querySelector(".close_pay");
+        const payDialogwx = document.querySelector(".pay_dialog_wx");
+        const openPaywx = document.querySelector(".pay_wx");
+
+        openDrawerButton.addEventListener("click", () => Drawer.open = true);
+        //closeDrawerButton.addEventListener("click", () => Drawer.open = false);
+        showSnackbarBtn.addEventListener("click", () => SnackBarShowByDNS.open = true);
+        openPaywx.addEventListener("click", () => payDialogwx.open = true);
+        closePay.addEventListener("click", () => payDialogwx.open = false);
+    </script>
+</body>
+</html>

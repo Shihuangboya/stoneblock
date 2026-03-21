@@ -11,42 +11,67 @@
 <body>
     <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
         <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
-        <mdui-top-app-bar-title>首页</mdui-top-app-bar-title>
+        <mdui-top-app-bar-title>报告漏洞</mdui-top-app-bar-title>
         <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
     </mdui-top-app-bar>
     <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
-    <p style="text-align: center">首页</p>
+    <p style="text-align: center">报告漏洞</p>
     <div id="main">
         <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-            <h4>总概</h4>
-            <p>StoneBlock是一个我的世界生存服务器。您可以在此处和玩家们一起交流，愉快地建造与游玩！</p>
-            <p>这是我们的服务器徽标：</p>
-            <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
-        </mdui-card></center>
-    </div>
-    <br >
-    <div id="recent">
-            <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-                <h4>最近</h4>
-                <p>StoneBlock终于开服了！</p>
-                <p>这是我们的服务器徽标：</p>
-                <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
+            <h4>报告</h4>
+            <p>您在何处发现了漏洞？</p>
+            <mdui-select
+                    variant="outlined"
+                    style="width: 90%;"
+                    placeholder="选出在何处"
+                    placement="top"
+                    clearable
+                    icon="bug_report"
+                >
+                    <mdui-menu-item value="logic">运行逻辑</mdui-menu-item>
+                    <mdui-menu-item value="file_notfound">文件不存在</mdui-menu-item>
+                    <mdui-menu-item value="log_or_reg">登录/注册机制</mdui-menu-item>
+                    <mdui-menu-item value="speed">运行速度</mdui-menu-item>
+                    <mdui-menu-item value="update">更新</mdui-menu-item>
+                    <mdui-menu-item value="typesettings">网页排版</mdui-menu-item>
+                    <mdui-menu-item value="apk_install">APK安装</mdui-menu-item>
+                    <mdui-menu-item value="links">超链接</mdui-menu-item>
+                    <mdui-menu-item value="join">加入服务器</mdui-menu-item>
+                    <mdui-menu-item value="play">游玩服务器</mdui-menu-item>
+                    <mdui-menu-item value="game_version">游戏版本</mdui-menu-item>
+                    <mdui-menu-item value="other" disabled>其他</mdui-menu-item>
+                    <mdui-icon slot="clear" name="refresh"></mdui-icon>
+                </mdui-select>
                 <br >
-                <mdui-button class="open_about">关于“最近”</mdui-button>
+                <br >
+                <mdui-text-field 
+                    label="其他（非必填）"
+                    rows="5"
+                    variant="outlined"
+                    placeholder="选择的框里没有你想汇报的错误？在这里写下详细"
+                    style="width: 90%"
+                    icon="bug_report"
+                >
+                </mdui-text-field>
+                <br >
+                <br >
+                <mdui-button icon="assignment_turned_in">反馈漏洞</mdui-button>
+                <br >
+                <br >
         </mdui-card></center>
-    </div>
+    <br >
     <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
         <!--mdui-button-icon icon="arrow_forward" class="closeBtn"></mdui-button-icon-->
         <mdui-list>
             <mdui-list-item icon="menu" nonclickable>侧边栏</mdui-list-item>
             <mdui-divider></mdui-divider>
-            <mdui-list-item icon="reorder" href="#main">总概</mdui-list-item>
-            <mdui-list-item icon="access_time" href="#recent">最近</mdui-list-item>
+            <mdui-list-item icon="reorder" href="./index.html#main">总概</mdui-list-item>
+            <mdui-list-item icon="access_time" href="./index.html#recent">最近</mdui-list-item>
             <mdui-list-item icon="file_download" href="./register.html">注册</mdui-list-item>
             <mdui-list-item icon="achive" href="./login.html">登录</mdui-list-item>
         </mdui-list>
     </mdui-navigation-drawer> 
-    <mdui-navigation-bar value="home">
+    <mdui-navigation-bar value="bug_report">
         <mdui-navigation-bar-item icon="home" value="home">首页</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="account_box" value="info" href="./info.html">个人信息</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="money_off" active-icon="attach_money" href="./giveaway.html" value="giveaway">捐赠 StoneBlock</mdui-navigation-bar-item>

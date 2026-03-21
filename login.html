@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>StoneBlock服务器 - 首页</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
+        <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
+        <mdui-top-app-bar-title>登录</mdui-top-app-bar-title>
+        <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
+    </mdui-top-app-bar>
+    <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
+    <p style="text-align: center">登录</p>
+    <p style="text-align: center">完成后，你就会成为StoneBlock服务器大家族的一位成员！</p>
+    
+    <center>
+        <mdui-card style="width:90%; max-width: 600px;" variant="outlined">
+            <form id="registerForm">
+                <h3>登录到 StoneBlock</h3>
+                <mdui-text-field 
+                    id="username" 
+                    required 
+                    icon="account_circle" 
+                    variant="outlined" 
+                    label="用户名" 
+                    helper="输入您注册时输入的用户名" 
+                    helper-on-focus 
+                    style="width: 90%; margin: 0 auto;" 
+                    maxlength="20" 
+                    counter 
+                    clearable
+                ></mdui-text-field>
+                <br >
+                <mdui-text-field 
+                    id="password" 
+                    required 
+                    type="password" 
+                    toggle-password 
+                    icon="key" 
+                    variant="outlined" 
+                    label="密码" 
+                    helper="输入您注册时输入的密码" 
+                    helper-on-focus 
+                    style="width: 90%; margin: 0 auto;" 
+                    clearable
+                ></mdui-text-field>
+                <br >
+                <mdui-text-field 
+                    id="email" 
+                    required 
+                    type="email" 
+                    icon="email" 
+                    variant="outlined" 
+                    label="验证邮箱" 
+                    helper="输入您注册时绑定的邮箱" 
+                    helper-on-focus 
+                    style="width: 90%; margin: 0 auto;" 
+                    clearable
+                ></mdui-text-field>
+                <br >
+                    <mdui-text-field 
+                        id="code" 
+                        required 
+                        icon="verified_user" 
+                        variant="outlined" 
+                        label="6位验证码" 
+                        helper="请输入邮箱收到的验证码" 
+                        helper-on-focus 
+                        style="width: 90%" 
+                        maxlength="6" 
+                        clearable
+                    ></mdui-text-field>
+                    <mdui-button 
+                        id="getCodeBtn" 
+                        type="button" 
+                        color="primary" 
+                        icon="mail_outline" 
+                        style="height: 40px; padding: 0 20px; margin: 0;"
+                    >
+                        获取验证码
+                    </mdui-button>
+                <br >
+                <mdui-switch 
+                    id="eula" 
+                    required 
+                    unchecked-icon="format_list_numbered"
+                    style="margin-left: 5%;"
+                ></mdui-switch>
+                <p style="display: inline-block; margin: 0 0 0 10px;">我同意 StoneBlock EULA</p>
+                <p style="text-align: center; margin: 15px 0;">没有账号？请<a href="./register.html">注册</a>。</p>
+                <br >
+                <mdui-fab 
+                    icon="done" 
+                    extended 
+                    type="submit"
+                    style="margin-bottom: 20px;"
+                >
+                    完成&提交
+                </mdui-fab>
+            </form>
+        </mdui-card>
+    </center>
+    <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
+        <mdui-list>
+            <mdui-list-item icon="menu" nonclickable>侧边栏</mdui-list-item>
+            <mdui-divider></mdui-divider>
+            <mdui-list-item icon="block" rounded nonclickable description="您必须先注册/登录才可以访问完整的官网！">请先登录</mdui-list-item>
+        </mdui-list>
+    </mdui-navigation-drawer> 
+    <mdui-navigation-bar value="login">
+        <mdui-navigation-bar-item icon="account_box" value="login">登录</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <mdui-snackbar delay="3000" class="snackbarDNS">别点啦～啥都没有</mdui-snackbar>
+    <mdui-snackbar delay="3000" class="snackbarCodeSuccess">验证码已发送，请注意查收！</mdui-snackbar>
+    <mdui-snackbar delay="3000" class="snackbarCodeError">验证码发送失败，请检查邮箱！</mdui-snackbar>
+    <mdui-snackbar delay="3000" class="snackbarRegisterSuccess">登录成功！可直接登录服务器～</mdui-snackbar>
+    <mdui-snackbar delay="3000" class="snackbarVerifyError">验证码错误，请重新输入！</mdui-snackbar>
+    <!-- 新增：账号密码错误提示 -->
+    <mdui-snackbar delay="3000" class="snackbarLoginError" color="error">用户名/密码/邮箱不匹配！</mdui-snackbar>
+    <mdui-snackbar delay="3000" class="snackbarNoAccount" color="error">该账号未注册，请先注册！</mdui-snackbar>
+    <script>
+        // 原有页面逻辑保留
+        const openDrawerButton = document.querySelector(".openBtn");
+        const Drawer = document.querySelector(".drawer");
+        const showSnackbarBtn = document.querySelector(".showSnackBar");
+        const SnackBarShowByDNS = document.querySelector(".snackbarDNS");
+        openDrawerButton.addEventListener("click", () => Drawer.open = true);
+        showSnackbarBtn.addEventListener("click", () => SnackBarShowByDNS.open = true);
+        // EmailJS核心配置保留
+        const PUBLIC_KEY = "159n4YpxcPZX_0PnK";
+        const SERVICE_ID = "service_fi3q1b3";
+        const USER_CODE_TEMPLATE = "template_xhmg0vn";
+        emailjs.init(PUBLIC_KEY);
+        // 页面元素+变量保留
+        const registerForm = document.getElementById("registerForm");
+        const getCodeBtn = document.getElementById("getCodeBtn");
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const codeInput = document.getElementById("code");
+        const eulaSwitch = document.getElementById("eula");
+        let verifyCode = ""; 
+        let countdown = 600; 
+        let timer = null; 
+        let isSubmitting = false; // 新增：防止重复提交
+        // 验证码逻辑保留
+        function generateCode() {
+            return Array.from({ length: 6 }, () => Math.floor(Math.random() * 10)).join("");
+        }
+        function startCountdown() {
+            getCodeBtn.disabled = true;
+            timer = setInterval(() => {
+                countdown--;
+                const min = Math.floor(countdown / 60);
+                const sec = countdown % 60;
+                getCodeBtn.innerHTML = `${min}分${sec.toString().padStart(2, "0")}秒`;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    getCodeBtn.disabled = false;
+                    getCodeBtn.innerHTML = "获取验证码";
+                    verifyCode = "";
+                }
+            }, 1000);
+        }
+        getCodeBtn.addEventListener("click", () => {
+            const username = usernameInput.value.trim();
+            const email = emailInput.value.trim();
+            const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!username) {
+                mdui.snackbar({ message: "请填写用户名！", color: "error" });
+                return;
+            }
+            if (!email || !emailReg.test(email)) {
+                mdui.snackbar({ message: "请填写有效的验证邮箱！", color: "error" });
+                return;
+            }
+            // 新增：获取验证码前先检查账号是否已注册
+            const existingUsers = JSON.parse(localStorage.getItem('stoneBlockUsers')) || [];
+            const hasAccount = existingUsers.some(user => user.username === username && user.email === email);
+            if (!hasAccount) {
+                document.querySelector(".snackbarNoAccount").open = true;
+                return;
+            }
+            verifyCode = generateCode();
+            emailjs.send(SERVICE_ID, USER_CODE_TEMPLATE, {
+                mc_name: username,
+                user_email: email,
+                code: verifyCode
+            }).then(() => {
+                document.querySelector(".snackbarCodeSuccess").open = true;
+                startCountdown();
+            }).catch(() => {
+                document.querySelector(".snackbarCodeError").open = true;
+            });
+        });
+        // 核心修改：表单提交逻辑（添加localStorage数据校验）
+        registerForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const inputCode = codeInput.value.trim();
+            const password = document.getElementById("password").value.trim();
+            const username = usernameInput.value.trim();
+            const userEmail = emailInput.value.trim();
+            
+            if (isSubmitting) return;
+            isSubmitting = true;
+
+            // 原有基础校验保留
+            if (password.length < 8) {
+                mdui.snackbar({ message: "密码至少需要8个字符！", color: "error" });
+                isSubmitting = false;
+                return;
+            }
+            if (!verifyCode) {
+                mdui.snackbar({ message: "请先点击获取验证码！", color: "error" });
+                isSubmitting = false;
+                return;
+            }
+            if (inputCode !== verifyCode) {
+                document.querySelector(".snackbarVerifyError").open = true;
+                isSubmitting = false;
+                return;
+            }
+            if (!eulaSwitch.checked) {
+                mdui.snackbar({ message: "请同意StoneBlock EULA！", color: "error" });
+                isSubmitting = false;
+                return;
+            }
+
+            // 核心：localStorage数据校验
+            const existingUsers = JSON.parse(localStorage.getItem('stoneBlockUsers')) || [];
+            // 匹配用户名、邮箱、密码是否一致
+            const validUser = existingUsers.find(user => 
+                user.username === username && 
+                user.email === userEmail && 
+                user.password === password
+            );
+
+            if (validUser) {
+                // 登录成功：存储当前登录状态
+                localStorage.setItem('currentLoginUser', JSON.stringify(validUser));
+                document.querySelector(".snackbarRegisterSuccess").open = true;
+                // 可选：跳转首页（如需跳转可修改下面路径）
+                // setTimeout(() => { window.location.href = "./index.html"; }, 1500);
+            } else {
+                document.querySelector(".snackbarLoginError").open = true;
+            }
+
+            // 重置状态
+            isSubmitting = false;
+            registerForm.reset();
+            clearInterval(timer);
+            countdown = 600;
+            getCodeBtn.disabled = false;
+            getCodeBtn.innerHTML = "获取验证码";
+            verifyCode = "";
+        });
+    </script>
+</body>
+</html>

@@ -11,28 +11,27 @@
 <body>
     <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
         <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
-        <mdui-top-app-bar-title>首页</mdui-top-app-bar-title>
+        <mdui-top-app-bar-title>信息</mdui-top-app-bar-title>
         <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
     </mdui-top-app-bar>
-    <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
-    <p style="text-align: center">首页</p>
-    <div id="main">
+    <h1 style="text-align: center">在这里查看您的个人信息</h1>
+    <p style="text-align: center">个人信息</p>
+    <div id="info">
         <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-            <h4>总概</h4>
-            <p>StoneBlock是一个我的世界生存服务器。您可以在此处和玩家们一起交流，愉快地建造与游玩！</p>
-            <p>这是我们的服务器徽标：</p>
-            <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
-        </mdui-card></center>
-    </div>
-    <br >
-    <div id="recent">
-            <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-                <h4>最近</h4>
-                <p>StoneBlock终于开服了！</p>
-                <p>这是我们的服务器徽标：</p>
-                <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
-                <br >
-                <mdui-button class="open_about">关于“最近”</mdui-button>
+            <br >
+            <mdui-avatar
+                icon="android"
+            >
+            </mdui-avatar>
+            <h4>您的信息</h4>
+            <p>用户名：</p>
+            <p id="showUsername">未登录</p>
+            <p>注册邮箱：</p>
+            <p id="showEmail">未登录</p>
+            <p>注册时间：</p>
+            <p id="showRegTime">未登录</p>
+            <br>
+            <mdui-button id="toLogin" color="primary" icon="login" style="display: none;">前往登录</mdui-button>
         </mdui-card></center>
     </div>
     <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
@@ -46,7 +45,7 @@
             <mdui-list-item icon="achive" href="./login.html">登录</mdui-list-item>
         </mdui-list>
     </mdui-navigation-drawer> 
-    <mdui-navigation-bar value="home">
+    <mdui-navigation-bar value="info">
         <mdui-navigation-bar-item icon="home" value="home">首页</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="account_box" value="info" href="./info.html">个人信息</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="money_off" active-icon="attach_money" href="./giveaway.html" value="giveaway">捐赠 StoneBlock</mdui-navigation-bar-item>
@@ -63,20 +62,50 @@
         <mdui-button icon="done" slot="action" class="close_about">好的</mdui-button>
     </mdui-dialog>
     <script>
+        // 原有元素获取
         const openDrawerButton = document.querySelector(".openBtn");
         const Drawer = document.querySelector(".drawer");
-        //const closeDrawerButton = document.querySelector(".closeBtn");
         const showSnackbarBtn = document.querySelector(".showSnackBar");
         const SnackBarShowByDNS = document.querySelector(".snackbarDNS");
         const closeAbout = document.querySelector(".close_about");
         const aboutRecent = document.querySelector(".about_recent");
-        const openAbout = document.querySelector(".open_about");
+        // 新增：个人信息展示元素
+        const showUsername = document.getElementById("showUsername");
+        const showEmail = document.getElementById("showEmail");
+        const showRegTime = document.getElementById("showRegTime");
+        const toLogin = document.getElementById("toLogin");
 
+        // 原有交互逻辑
         openDrawerButton.addEventListener("click", () => Drawer.open = true);
-        //closeDrawerButton.addEventListener("click", () => Drawer.open = false);
         showSnackbarBtn.addEventListener("click", () => SnackBarShowByDNS.open = true);
-        openAbout.addEventListener("click", () => aboutRecent.open = true);
-        closeAbout.addEventListener("click", () => aboutRecent.open = false);
+        // 修复openAbout未定义报错，增加判空处理
+        if (window.openAbout) {
+            openAbout.addEventListener("click", () => aboutRecent.open = true);
+        }
+        if (closeAbout) {
+            closeAbout.addEventListener("click", () => aboutRecent.open = false);
+        }
+
+        // 新增：渲染登录用户信息核心逻辑
+        function renderUserInfo() {
+            // 读取login.html存储的当前登录用户信息
+            const currentUser = JSON.parse(localStorage.getItem('currentLoginUser')) || null;
+            if (currentUser) {
+                // 已登录，展示用户信息
+                showUsername.textContent = currentUser.username || "未知";
+                showEmail.textContent = currentUser.email || "未知";
+                showRegTime.textContent = currentUser.registerTime || "未知";
+            } else {
+                // 未登录，显示前往登录按钮并绑定跳转事件
+                toLogin.style.display = "inline-block";
+                toLogin.addEventListener("click", () => {
+                    window.location.href = "./login.html";
+                });
+            }
+        }
+
+        // 页面加载时立即渲染用户信息
+        window.onload = renderUserInfo;
     </script>
 </body>
 </html>

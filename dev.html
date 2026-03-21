@@ -16,23 +16,18 @@
     </mdui-top-app-bar>
     <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
     <p style="text-align: center">首页</p>
-    <div id="main">
-        <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-            <h4>总概</h4>
-            <p>StoneBlock是一个我的世界生存服务器。您可以在此处和玩家们一起交流，愉快地建造与游玩！</p>
-            <p>这是我们的服务器徽标：</p>
-            <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
-        </mdui-card></center>
-    </div>
-    <br >
     <div id="recent">
             <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
-                <h4>最近</h4>
-                <p>StoneBlock终于开服了！</p>
-                <p>这是我们的服务器徽标：</p>
-                <img src="https://img.cdn1.vip/i/698843e5553ca_1770537957.webp">
+                <h4>成为一名开发者</h4>
+                <p>您十分精通 Minecraft 插件和 Addon 吗？如果是，十分欢迎您来到 Stoneblock 帮助我们开发插件和 Addon。</p>
+                <p>我们需要收集这些信息，才可以确保您是一个被邀请的开发者：</p>
+                <mdui-text-field label="邀请码" placeholder="输入您在邮件中收到的邀请码" variant="outlined" style="width:90%" icon="developer_mode"></mdui-text-field>
                 <br >
-                <mdui-button class="open_about">关于“最近”</mdui-button>
+                <br >
+                <mdui-checkbox>我同意《StoneBlock 开发者协议》</mdui-checkbox>
+                <br >
+                <br >
+                <mdui-button class="open_about" icon="unarchive">提交</mdui-button>
         </mdui-card></center>
     </div>
     <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
@@ -54,12 +49,16 @@
     </mdui-navigation-bar>
     <mdui-snackbar delay="3000" class="snackbarDNS">别点啦～啥都没有</mdui-snackbar>
     <mdui-dialog
-        close-on-overlay-click
-        headline="关于“最近”卡片"
-        description="因为我们并没有架设后端，所以我们没有办法动态更新“最近”卡片中的内容，必须通过您更新APP的版本才可以刷新“最近”卡片中的内容"
-        icon="question_answer"
+        icon="close"
         class="about_recent"
     >
+        <span slot="headline" style="text-align: center">抱歉，但是你还没有资格成为 StoneBlock 的开发者</span>
+        <span slot="description">经过我们的一番验证，您无法成为 StoneBlock 的开发者，这可能是由于以下原因造成的：</span>
+        <!--span slot="description"--><li>填写了错误的邀请码</li><!--/span-->
+        <li>您没有被邀请成为开发者</li>
+        <li>网络不好</li>
+        <li>未登录</li>
+        
         <mdui-button icon="done" slot="action" class="close_about">好的</mdui-button>
     </mdui-dialog>
     <script>

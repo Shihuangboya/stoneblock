@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>StoneBlock生存服务器 - 登录</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate">
+        <mdui-button-icon slot="start" icon="dns"></mdui-button-icon>
+        <mdui-top-app-bar-title>StoneBlock基岩版服务器</mdui-top-app-bar-title>
+    </mdui-top-app-bar>
+
+    <h1 class="mdui-text-center" style="font-size: 22px; margin: 16px 0;">欢迎登录 StoneBlock服务器</h1>
+    <p class="mdui-text-center">信息仅本地存储，安全无收集</p>
+
+    <mdui-card style="max-width: 500px; margin: 24px auto;" variant="filled">
+        <mdui-card-content>
+            <mdui-text-field 
+                id="username" 
+                label="用户名" 
+                icon="account_circle" 
+                maxlength="10" 
+                helper="不可超过10个字符"
+                variant="outlined"
+                style="margin: 12px 0;"
+                required
+            ></mdui-text-field>
+
+            <mdui-text-field 
+                id="pwd" 
+                label="密码" 
+                icon="key" 
+                type="password" 
+                toggle-password
+                helper="至少8个字符"
+                variant="outlined"
+                style="margin: 12px 0;"
+                required
+            ></mdui-text-field>
+
+            <mdui-switch 
+                id="agree" 
+                label="我已阅读并同意服务器用户协议"
+                style="margin: 12px 0;"
+                required
+            ></mdui-switch>
+
+            <p class="mdui-text-center" style="font-size: 12px; color: #9ca3af; margin: 8px 0;">
+                数据保存在本地浏览器，打包APK后可持久化
+            </p>
+        </mdui-card-content>
+        <mdui-card-actions class="mdui-justify-center">
+            <mdui-button 
+                id="submitBtn" 
+                icon="done" 
+                color="primary"
+                style="width: 80%;"
+            >提交并登录</mdui-button>
+        </mdui-card-actions>
+    </mdui-card>
+
+    <mdui-navigation-bar style="position: fixed; bottom: 0; left: 0; right: 0;" value="home">
+        <mdui-navigation-bar-item icon="home" value="home">首页</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="dns" value="server" href="./server.html">服务器</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="people" value="info" href="./info.html">您的信息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="attach_money" value="give-away" href="./give-away.html">捐赠</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mdui.initAll();
+            const username = mdui.getInstance(document.getElementById('username'));
+            const pwd = mdui.getInstance(document.getElementById('pwd'));
+            const agree = mdui.getInstance(document.getElementById('agree'));
+            const submitBtn = mdui.getInstance(document.getElementById('submitBtn'));
+
+            // 登录逻辑
+            submitBtn.$el.addEventListener('click', () => {
+                const un = username.value.trim();
+                const pw = pwd.value.trim();
+                const ag = agree.$el.checked;
+
+                // 基础校验
+                if (!un || un.length > 10) {
+                    mdui.snackbar({ message: '用户名需1-10个字符', timeout: 2000, color: 'warning' });
+                    return;
+                }
+                if (!pw || pw.length < 8) {
+                    mdui.snackbar({ message: '密码至少8个字符', timeout: 2000, color: 'warning' });
+                    return;
+                }
+                if (!ag) {
+                    mdui.snackbar({ message: '请同意用户协议', timeout: 2000, color: 'warning' });
+                    return;
+                }
+
+                // 本地存储用户数据
+                localStorage.setItem('stoneblock_user', JSON.stringify({ username: un, password: pw }));
+                localStorage.setItem('stoneblock_login', 'true');
+
+                // 成功提示并跳转
+                mdui.snackbar({ message: '登录成功！', color: 'success', timeout: 1500 })
+                    .then(() => window.location.href = './info.html');
+            });
+
+            // 未登录拦截（保留基础权限控制）
+            document.querySelectorAll('mdui-navigation-bar-item[href]').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (!localStorage.getItem('stoneblock_login') && !item.href.includes('index.html')) {
+                        e.preventDefault();
+                        mdui.snackbar({ message: '请先登录后访问', color: 'error', timeout: 2000 });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
