@@ -16,9 +16,11 @@
     </mdui-top-app-bar>
     <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
     <p style="text-align: center">首页</p>
+    <center>
     <div id="main" style="width: 80%">
         //内容
     </div>
+    </center>
     <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
         <!--mdui-button-icon icon="arrow_forward" class="closeBtn"></mdui-button-icon-->
         <mdui-list>

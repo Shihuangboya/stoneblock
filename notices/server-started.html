@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>StoneBlock服务器 - 首页</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
+        <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
+        <mdui-top-app-bar-title>首页</mdui-top-app-bar-title>
+        <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
+    </mdui-top-app-bar>
+    <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
+    <p style="text-align: center">首页</p>
+    <center>
+    <div id="main" style="width: 80%">
+        <center><h1>StoneBlock 开服了！</h1></center>
+        <ul>
+            <li>日期：2026年1月10日</li>
+            <li>时间：15：28</li>
+            <li>级别：重要</li>
+        </ul>
+        <p>在今天，StoneBlock 开服了！</p>
+        <h2>服务器相关信息</h2>
+        <p>地址：play.simpfun.cn</p>
+        <p>端口：xxxxxx</p>
+        <h2>玩家们可以干什么？</h2>
+        <p>服务器中，您可以生存，强大的插件既保护服务器不被外挂入侵，也使您的生存更有趣便捷！由于服务器初期刚开，玩家不多，您可以赶快上线，赶在其他玩家之前探索出生点附近的遗迹，没准会有好东西呢？</p>
+        <p>同时，请遵守<a href="eula.html">《Stoneblock 服务器守则》</a>，否则我们有权封禁！</p>
+    </div>
+    </center>
+    <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
+        <!--mdui-button-icon icon="arrow_forward" class="closeBtn"></mdui-button-icon-->
+        <mdui-list>
+            <mdui-list-item icon="menu" nonclickable>侧边栏</mdui-list-item>
+            <mdui-divider></mdui-divider>
+            <mdui-list-item icon="reorder" href="#main">总概</mdui-list-item>
+            <mdui-list-item icon="access_time" href="#recent">最近</mdui-list-item>
+            <mdui-list-item icon="file_download" href="./register.html">注册</mdui-list-item>
+            <mdui-list-item icon="achive" href="./login.html">登录</mdui-list-item>
+        </mdui-list>
+    </mdui-navigation-drawer> 
+    <mdui-navigation-bar value="home">
+        <mdui-navigation-bar-item icon="home" value="home">首页</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="message" value="notice" href="notice.html">消息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="account_box" value="info" href="./info.html">个人信息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="money_off" active-icon="attach_money" href="./giveaway.html" value="giveaway">捐赠 StoneBlock</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bug_report" href="./rep_bug.html" value="bug_report">报告漏洞</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <mdui-snackbar delay="3000" class="snackbarDNS">别点啦～啥都没有</mdui-snackbar>
+    <mdui-dialog
+        close-on-overlay-click
+        headline="关于“最近”卡片"
+        description="因为我们并没有架设后端，所以我们没有办法动态更新“最近”卡片中的内容，必须通过您更新APP的版本才可以刷新“最近”卡片中的内容"
+        icon="question_answer"
+        class="about_recent"
+    >
+        <mdui-button icon="done" slot="action" class="close_about">好的</mdui-button>
+    </mdui-dialog>
+    <script>
+        const openDrawerButton = document.querySelector(".openBtn");
+        const Drawer = document.querySelector(".drawer");
+        //const closeDrawerButton = document.querySelector(".closeBtn");
+        const showSnackbarBtn = document.querySelector(".showSnackBar");
+        const SnackBarShowByDNS = document.querySelector(".snackbarDNS");
+        const closeAbout = document.querySelector(".close_about");
+        const aboutRecent = document.querySelector(".about_recent");
+        const openAbout = document.querySelector(".open_about");
+
+        openDrawerButton.addEventListener("click", () => Drawer.open = true);
+        //closeDrawerButton.addEventListener("click", () => Drawer.open = false);
+        showSnackbarBtn.addEventListener("click", () => SnackBarShowByDNS.open = true);
+        openAbout.addEventListener("click", () => aboutRecent.open = true);
+        closeAbout.addEventListener("click", () => aboutRecent.open = false);
+    </script>
+</body>
+</html>
