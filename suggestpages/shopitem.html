@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <title>StoneBlock服务器 - 建议</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate" variant="center-aligned">
+        <mdui-button-icon icon="dns" class="showSnackBar"></mdui-button-icon>
+        <mdui-top-app-bar-title>建议</mdui-top-app-bar-title>
+        <mdui-button-icon icon="more_vert" class="openBtn"></mdui-button-icon>
+    </mdui-top-app-bar>
+    <h1 style="text-align: center">欢迎来到 StoneBlock 服务器官方网站</h1>
+    <p style="text-align: center">建议</p>
+    <div id="main">
+        <center><mdui-card style="text-align: center; width:90%;" variant="outlined">
+            <h4>建议</h4>
+            <p>建议商店物品</p>
+            <p>完成此表单以建议</p>
+            <iframe width="640px" height="480px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAW62v4pUQklTOVRRTkdXSDA1M0cyVjFVTUs5Vjk0Ty4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+            <mdui-button icon="shopping_cart" href="suggestpages/shopitem.html">建议商店物品</mdui-button>
+        </mdui-card></center>
+    <br >
+    <mdui-navigation-drawer placement="right" modal class="drawer" close-on-overlay-click>
+        <!--mdui-button-icon icon="arrow_forward" class="closeBtn"></mdui-button-icon-->
+        <mdui-list>
+            <mdui-list-item icon="menu" nonclickable>侧边栏</mdui-list-item>
+            <mdui-divider></mdui-divider>
+            <mdui-list-item icon="reorder" href="./index.html#main">总概</mdui-list-item>
+            <mdui-list-item icon="access_time" href="./index.html#recent">最近</mdui-list-item>
+            <mdui-list-item icon="file_download" href="./register.html">注册</mdui-list-item>
+            <mdui-list-item icon="achive" href="./login.html">登录</mdui-list-item>
+        </mdui-list>
+    </mdui-navigation-drawer> 
+    <mdui-navigation-bar value="bug_report">
+        <mdui-navigation-bar-item icon="home" value="home" href="index.html">首页</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="message" value="notice" href="notice.html">消息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="account_box" value="info" href="./info.html">个人信息</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="money_off" active-icon="attach_money" href="./giveaway.html" value="giveaway">捐赠 StoneBlock</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bug_report" href="./rep_bug.html" value="bug_report">报告漏洞</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <mdui-snackbar delay="3000" class="snackbarDNS">别点啦～啥都没有</mdui-snackbar>
+    <mdui-dialog
+        close-on-overlay-click
+        headline="关于“最近”卡片"
+        description="因为我们并没有架设后端，所以我们没有办法动态更新“最近”卡片中的内容，必须通过您更新APP的版本才可以刷新“最近”卡片中的内容"
+        icon="question_answer"
+        class="about_recent"
+    >
+        <mdui-button icon="done" slot="action" class="close_about">好的</mdui-button>
+    </mdui-dialog>
+    <script>
+        const openDrawerButton = document.querySelector(".openBtn");
+        const Drawer = document.querySelector(".drawer");
+        //const closeDrawerButton = document.querySelector(".closeBtn");
+        const showSnackbarBtn = document.querySelector(".showSnackBar");
+        const SnackBarShowByDNS = document.querySelector(".snackbarDNS");
+        const closeAbout = document.querySelector(".close_about");
+        const aboutRecent = document.querySelector(".about_recent");
+        const openAbout = document.querySelector(".open_about");
+
+        openDrawerButton.addEventListener("click", () => Drawer.open = true);
+        //closeDrawerButton.addEventListener("click", () => Drawer.open = false);
+        showSnackbarBtn.addEventListener("click", () => SnackBarShowByDNS.open = true);
+        openAbout.addEventListener("click", () => aboutRecent.open = true);
+        closeAbout.addEventListener("click", () => aboutRecent.open = false);
+    </script>
+</body>
+</html>
